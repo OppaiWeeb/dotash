@@ -44,16 +44,12 @@ sub_install() {
                     echo -e "$BICyan ${PWD}/${NAME} -> ${LOCATION}/${NAME}$Color_Off"
                     echo "${PWD} / ${NAME} -->> ${LOCATION}"
                     rm -rf "${LOCATION}/${NAME}"
-                    echo "toto"
                     ln -s "${PWD}/${NAME}" "${LOCATION}/${NAME}"
-                    echo "tata"
                 else
                     echo -e "$BICyan ${PWD}/${NAME} -> ${LOCATION}$Color_Off"
                     echo "${PWD} / ${NAME} -->> ${LOCATION}"
                     rm -rf "${LOCATION}"
-                    echo "toto1"
                     ln -s "${PWD}/${NAME}" "${LOCATION}"
-                    echo "tata1"
                 fi
             fi
         done < "./$CONFIG_FILE" && touch $LOCK_FILE &&
@@ -77,10 +73,7 @@ sub_preview() {
 
 sub_reinstall() {
     if [ -f "./$CONFIG_FILE" ]; then
-        echo "Uninstall"
-        sub_remove
-        echo "Install"
-        sub_install
+        sub_remove && sub_install
     else
         echo "This directory does not have a $CONFIG_FILEig!"
     fi
@@ -223,7 +216,6 @@ sub_add() {
         fi
         listbox -t "Is this file the same name as it will be when copied or different?" -o "same|different" -r FILEFOLDER
         if [ -z "$FILEFOLDER" ]; then
-            echo "Je suis plein $FILEFOLDER"
             echo "You need to specify if this is a file or folder!"
             exit
         fi
