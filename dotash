@@ -62,7 +62,11 @@ sub_install() {
 sub_preview() {
     if [ -f "./$CONFIG_FILE" ]; then
         while IFS=" " read -r src dest type; do
-                echo -e "$BIPurple ${src#*=} -->> ${dest#*=}/${src#*=}$Color_Off"
+            if [ ${type#*=} == "same" ]; then
+                    echo -e "$BIPurple ${src#*=} -->> ${dest#*=}/${src#*=}$Color_Off"
+                else
+                    echo -e "$BIPurple ${src#*=} -->> ${dest#*=}$Color_Off"
+                fi
         done < "./$CONFIG_FILE" && \
         echo -e "$BIGreen look this is what install look will look like when you look at$Color_Off"
     else
@@ -219,6 +223,7 @@ sub_add() {
             echo "You need to specify if this is a file or folder!"
             exit
         fi
+        echo "Location is $LOCATION"
         echo "source_File=$NAME Dest=$LOCATION fileFolder=$FILEFOLDER" >> $CONFIG_FILE
         if [ "$FILEFOLDER" == 'same' ]; then
             echo -e "$BIGreen ${PWD}/${NAME} will be symlinked to ${LOCATION}/${NAME} next time you install!$Color_Off"
