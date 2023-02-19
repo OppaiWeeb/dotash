@@ -36,18 +36,16 @@ sub_install() {
             NAME=${NAME#*=}
             LOCATION=${LOCATION#*=}
             TYPE=${TYPE#*=}
-            LOCATION=${LOCATION/\~/$HOME/}
+            LOCATION=${LOCATION/\~/$HOME}
             if [ -h "${LOCATION}/${NAME}" ]; then
                 echo -e "$BICyan Link Exists ${PWD}/${NAME} -> ${LOCATION}/${NAME}$Color_Off"
             else
                 if [ $TYPE == 'same' ]; then
-                    echo -e "$BICyan ${PWD}/${NAME} -> ${LOCATION}/${NAME}$Color_Off"
-                    echo "${PWD} / ${NAME} -->> ${LOCATION}"
+                    echo -e "$BICyan ${PWD}/${NAME} ->> ${LOCATION}/${NAME}$Color_Off"
                     rm -rf "${LOCATION}/${NAME}"
                     ln -s "${PWD}/${NAME}" "${LOCATION}/${NAME}"
                 else
-                    echo -e "$BICyan ${PWD}/${NAME} -> ${LOCATION}$Color_Off"
-                    echo "${PWD} / ${NAME} -->> ${LOCATION}"
+                    echo -e "$BICyan ${PWD}/${NAME} ->> ${LOCATION}$Color_Off"
                     rm -rf "${LOCATION}"
                     ln -s "${PWD}/${NAME}" "${LOCATION}"
                 fi
@@ -77,7 +75,7 @@ sub_preview() {
 
 sub_reinstall() {
     if [ -f "./$CONFIG_FILE" ]; then
-        sub_remove && sub_install
+        sub_uninstall && sub_install
     else
         echo "This directory does not have a $CONFIG_FILEig!"
     fi
@@ -92,12 +90,11 @@ sub_uninstall() {
             NAME=${NAME#*=}
             LOCATION=${LOCATION#*=}
             TYPE=${TYPE#*=}
+            LOCATION=${LOCATION/\~/$HOME}
         if [ $TYPE == "same" ]; then
-            rm -rf "${LOCATION:?}/${NAME}"
-            echo -e "$BIRed Removed ${LOCATION:?}/${NAME}$Color_Off"
+            rm -rf "${LOCATION:?}/${NAME}" && echo -e "$BIRed Removed ${LOCATION:?}/${NAME}$Color_Off"
         else
-            rm -f "${LOCATION:?}"
-            echo -e "$BIRed Removed ${LOCATION:?}$Color_Off"
+            rm -f "${LOCATION:?}" && echo -e "$BIRed Removed ${LOCATION:?}$Color_Off"
         fi
     done < "./$CONFIG_FILE" &&
     echo -e "$BIRed All links have been removed$Color_Off" && rm -f $LOCK_FILE
