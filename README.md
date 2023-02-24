@@ -1,6 +1,7 @@
 # DotAsh
 
 > :rocket: A lightweight dotfile bootstrapper!
+*Forked from [CallMeEchoCodes/dossier](https://github.com/CallMeEchoCodes/dossier)*
 
 ## 🚩 Table of Contents
 
@@ -11,7 +12,7 @@
 
 
 ## 🤖 Why Use DotAsh?
-DotAsh is a tool that symlinks your dotfiles to where they should be. Allowing you to setup a computer really fast! While other alternatives exist DotAsh aims to be simpler than other alternatives without dependency.
+DotAsh is a tool that symlinks your dotfiles to where they should be. Allowing you to setup a computer really fast! While other alternatives exist DotAsh aims to be simpler than other alternatives without dependencies.
 
 ## :wrench: Installing
 Install with Git: 
@@ -52,3 +53,6 @@ Before uploading your PR, test all features one last time to check if there are 
 ## 📜 License
 
 This software is licensed under the [WTFPL](http://www.wtfpl.net/about/).
+
+## Contributers
+[CallMeEchoCodes](https://github.com/CallMeEchoCodes/): Made dossier which this program is a fork of

@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ProgName="$(basename -- "$0")"
 ProgName="${ProgName:-DotAsh}"
 CONFIG_FILE="DotAsh.conf"
